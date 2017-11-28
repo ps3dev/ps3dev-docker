@@ -23,7 +23,7 @@
 
  Use the helper script to run 'make' on the current directory:
 
-   ps3dev-docker make
+   ps3dev-docker.sh make
 
  Or, manually run 'make' on the current directory:
 
