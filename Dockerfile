@@ -2,8 +2,8 @@ FROM ubuntu:17.10
 MAINTAINER Naomi Peori <naomi@peori.ca>
 
 ENV PS3DEV /usr/local/ps3dev
-ENV PSL1GHT $PS3DEV
-ENV PATH=$PATH:$PS3DEV/bin:$PS3DEV/ppu/bin:$PS3DEV/spu/bin
+ENV PSL1GHT ${PS3DEV}
+ENV PATH ${PATH}:${PS3DEV}/bin:${PS3DEV}/ppu/bin:${PS3DEV}/spu/bin
 
 RUN \
   apt-get -y update && \
@@ -17,3 +17,5 @@ RUN \
   ./toolchain.sh && \
   cd .. && \
   rm -Rf ps3toolchain
+
+WORKDIR /build

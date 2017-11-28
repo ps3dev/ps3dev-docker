@@ -27,7 +27,7 @@
 
  Or, manually run 'make' on the current directory:
 
-   docker run -v `pwd`:/build ps3dev-docker /bin/bash -c "cd /build && make"
+   docker run -v `pwd`:/build ps3dev-docker make
 
  ============================
   How do I save and load it?
