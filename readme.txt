@@ -13,11 +13,19 @@
 
    docker build -t ps3dev-docker .
 
+ Copy the helper script:
+
+   cp ps3dev-docker.sh /usr/local/bin
+
  ==================
   How do I use it?
  ==================
 
- Run 'make' on the current directory:
+ Use the helper script to run 'make' on the current directory:
+
+   ps3dev-docker make
+
+ Or, manually run 'make' on the current directory:
 
    docker run -v `pwd`:/build ps3dev-docker /bin/bash -c "cd /build && make"
 
