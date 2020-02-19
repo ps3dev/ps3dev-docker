@@ -1,4 +1,4 @@
-FROM ubuntu:19.10
+FROM ubuntu:18.04
 MAINTAINER Naomi Peori <naomi@peori.ca>
 
 ENV PS3DEV /usr/local/ps3dev
