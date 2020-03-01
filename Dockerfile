@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-MAINTAINER Naomi Peori <naomi@peori.ca>
+LABEL Naomi Peori <naomi@peori.ca>
 
 ENV PS3DEV /usr/local/ps3dev
 ENV PSL1GHT ${PS3DEV}
