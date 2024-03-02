@@ -48,11 +48,5 @@ RUN apt update \
     && /toolchain/toolchain.sh \
     && rm -rf /toolchain
 
-RUN cd ${PS3DEV} \
-    && git clone https://github.com/ps3dev/ps3libraries /ps3libraries \
-    && cd /ps3libraries \
-    && ./libraries.sh \
-    && rm -rf /ps3libraries
-
 WORKDIR /build
 CMD ["/bin/bash"]
