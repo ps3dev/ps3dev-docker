@@ -10,7 +10,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt update \
     && apt upgrade -y \
-    && apt install -y \
+    && apt --no-install-recommends install -y \
     autoconf \
     automake \
     bison \
