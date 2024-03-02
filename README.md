@@ -1,42 +1,44 @@
- ====================
-  What does this do?
- ====================
+[![ci-docker](https://github.com/humbertodias/ps3dev-docker/actions/workflows/deploy.yml/badge.svg)](https://github.com/humbertodias/ps3dev-docker/actions/workflows/deploy.yml)
 
-  This program will automatically build a docker image with the ps3dev
-  toolchain ready to be used for homebrew development.
+## What does this do?
 
- ====================
-  How do I build it?
- ====================
+This program will automatically build a docker image with the ps3dev
+toolchain ready to be used for homebrew development.
 
- Build the image:
+## How do I build it?
 
-   docker build -t ps3dev-docker .
+Build the image:
 
- Copy the helper script:
+```sh
+docker build -t ps3dev-docker .
+```
+Copy the helper script:
 
-   cp ps3dev-docker.sh /usr/local/bin
-
- ==================
-  How do I use it?
- ==================
+```
+cp ps3dev-docker.sh /usr/local/bin
+```
+## How do I use it?
 
  Use the helper script to run 'make' on the current directory:
 
-   ps3dev-docker.sh make
+```
+ps3dev-docker.sh make
+```
+Or, manually run 'make' on the current directory:
 
- Or, manually run 'make' on the current directory:
+```
+docker run -v `pwd`:/build ps3dev-docker make
+```
 
-   docker run -v `pwd`:/build ps3dev-docker make
+## How do I save and load it?
 
- ============================
-  How do I save and load it?
- ============================
+Save the image:
 
- Save the image:
+```
+docker save ps3dev-docker | bzip2 > ps3dev-docker.tar.bz2
+```
+Load the image:
 
-   docker save ps3dev-docker | bzip2 > ps3dev-docker.tar.bz2
-
- Load the image:
-
-   docker load < bzip2 -dc ps3dev-docker.tar.bz2
+```
+docker load < bzip2 -dc ps3dev-docker.tar.bz2
+```
