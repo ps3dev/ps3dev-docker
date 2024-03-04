@@ -5,6 +5,7 @@ ENV TOOLCHAIN_VERSION 0359891a9e65785a12fab0b0f9479d81f0d146b0
 ENV PS3DEV  /usr/local/ps3dev
 ENV PSL1GHT $PS3DEV
 ENV PATH    $PATH:$PS3DEV/bin:$PS3DEV/ppu/bin:$PS3DEV/spu/bin:$PS3DEV/portlibs/ppu/bin
+ENV PKG_CONFIG_PATH $PKG_CONFIG_PATH:$PS3DEV/portlibs/ppu/lib/package
 
 ENV DEBIAN_FRONTEND noninteractive
 
