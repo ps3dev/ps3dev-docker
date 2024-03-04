@@ -19,6 +19,7 @@ RUN apt update \
     ca-certificates \
     cmake \
     flex \
+    gettext-base \
     g++ \
     gcc \
     git \
