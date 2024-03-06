@@ -1,4 +1,7 @@
 [![ci-docker](https://github.com/humbertodias/ps3dev-docker/actions/workflows/deploy.yml/badge.svg)](https://github.com/humbertodias/ps3dev-docker/actions/workflows/deploy.yml)
+[![](https://images.microbadger.com/badges/image/hldtux/ps3dev.svg)](https://microbadger.com/images/hldtux/ps3dev)
+[![](https://img.shields.io/docker/pulls/hldtux/ps3dev.svg?maxAge=604800)](https://hub.docker.com/r/hldtux/ps3dev/)
+
 
 ## What does this do?
 
