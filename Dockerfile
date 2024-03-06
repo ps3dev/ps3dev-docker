@@ -1,7 +1,5 @@
 FROM ubuntu:24.04
 
-ENV TOOLCHAIN_VERSION 0359891a9e65785a12fab0b0f9479d81f0d146b0
-
 ENV PS3DEV  /usr/local/ps3dev
 ENV PSL1GHT $PS3DEV
 ENV PATH    $PATH:$PS3DEV/bin:$PS3DEV/ppu/bin:$PS3DEV/spu/bin:$PS3DEV/portlibs/ppu/bin
@@ -45,8 +43,6 @@ RUN apt update \
     # pass toolchain's check for gmp
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && git clone https://github.com/humbertodias/ps3toolchain.git /toolchain \
-    && cd /toolchain \
-    && git checkout -qf $TOOLCHAIN_VERSION \
     && /toolchain/toolchain.sh \
     && rm -rf /toolchain
 
