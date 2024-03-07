@@ -42,7 +42,7 @@ RUN apt update \
     && echo "check_certificate = off" >> ~/.wgetrc \
     # pass toolchain's check for gmp
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
-    && git clone https://github.com/humbertodias/ps3toolchain.git /toolchain \
+    && git clone https://github.com/humbertodias/ps3toolchain.git -b no-pthread /toolchain \
     && /toolchain/toolchain.sh \
     && rm -rf /toolchain
 
