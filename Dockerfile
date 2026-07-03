@@ -1,4 +1,4 @@
-FROM debian:12-slim
+FROM debian:13-slim
 MAINTAINER Naomi Peori <naomi@peori.ca>
 
 ENV PS3DEV /usr/local/ps3dev
