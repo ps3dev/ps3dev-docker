@@ -15,16 +15,6 @@ jobs:
   dockerhub-push:
     runs-on: ubuntu-latest
     environment: DockerHub
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-#          - linux/arm/v7
-#          - linux/arm64/v8
-#          - linux/ppc64le
-#          - linux/s390x
-
     env:
       DOCKERHUB_REPONAME: ps3dev
       DOCKERHUB_REPOTAG: latest
@@ -62,6 +52,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPONAME }}:${{ env.DOCKERHUB_REPOTAG }}
