@@ -5,12 +5,10 @@ ENV PS3DEV  /usr/local/ps3dev
 ENV PSL1GHT $PS3DEV
 ENV PATH    $PATH:$PS3DEV/bin:$PS3DEV/ppu/bin:$PS3DEV/spu/bin:$PS3DEV/portlibs/ppu/bin
 ENV PKG_CONFIG_PATH $PKG_CONFIG_PATH:$PS3DEV/portlibs/ppu/lib/pkgconfig
+ENV DEBIAN_FRONTEND=noninteractive
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt update \
-    && apt upgrade -y \
-    && apt --no-install-recommends install -y \
+RUN apt-get update \
+    && apt-get --no-install-recommends install -y \
     autoconf \
     automake \
     bison \
@@ -38,12 +36,14 @@ RUN apt update \
     wget \
     xz-utils \
     zlib1g-dev \
-    # Fixes certificate errors with letsencrypt in ARMv7 
-    && echo "ca_certificate=/etc/ssl/certs/ca-certificates.crt" >> /etc/wgetrc \
-    && echo "check_certificate = off" >> ~/.wgetrc \
-    # pass toolchain's check for gmp
-    && ln -sf /usr/include/*-linux-gnu/gmp.h /usr/include/gmp.h \
-    && git clone https://github.com/humbertodias/ps3toolchain.git /toolchain \
+    && rm -rf /var/lib/apt/lists/*
+
+# Fixes certificate errors with letsencrypt in ARMv7
+RUN echo "ca_certificate=/etc/ssl/certs/ca-certificates.crt" >> /etc/wgetrc \
+    && echo "check_certificate = off" >> /root/.wgetrc \
+    && ln -sf "/usr/include/$(gcc -dumpmachine)/gmp.h" /usr/include/gmp.h
+
+RUN git clone --depth 1 https://github.com/humbertodias/ps3toolchain.git /toolchain \
     && /toolchain/toolchain.sh \
     && rm -rf /toolchain
 
