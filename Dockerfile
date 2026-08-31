@@ -1,4 +1,5 @@
-FROM ubuntu:24.04
+FROM debian:13-slim
+MAINTAINER Naomi Peori <naomi@peori.ca>
 
 ENV PS3DEV  /usr/local/ps3dev
 ENV PSL1GHT $PS3DEV
