@@ -1,21 +1,51 @@
 FROM debian:13-slim
 MAINTAINER Naomi Peori <naomi@peori.ca>
 
-ENV PS3DEV /usr/local/ps3dev
-ENV PSL1GHT ${PS3DEV}
-ENV PATH ${PATH}:${PS3DEV}/bin:${PS3DEV}/ppu/bin:${PS3DEV}/spu/bin
+ENV PS3DEV  /usr/local/ps3dev
+ENV PSL1GHT $PS3DEV
+ENV PATH    $PATH:$PS3DEV/bin:$PS3DEV/ppu/bin:$PS3DEV/spu/bin:$PS3DEV/portlibs/ppu/bin
+ENV PKG_CONFIG_PATH $PKG_CONFIG_PATH:$PS3DEV/portlibs/ppu/lib/pkgconfig
+ENV DEBIAN_FRONTEND=noninteractive
 
-RUN \
-  apt-get -y update && \
-  apt-get -y install autoconf bison build-essential flex git libelf-dev libgmp3-dev libncurses5-dev libssl-dev libtool-bin pkg-config python-dev-is-python3 texinfo wget zlib1g-dev && \
-  apt-get -y clean autoclean autoremove && \
-  rm -rf /var/lib/{apt,dpkg,cache,log}/
+RUN apt-get update \
+    && apt-get --no-install-recommends install -y \
+    autoconf \
+    automake \
+    bison \
+    bzip2 \
+    ca-certificates \
+    cmake \
+    flex \
+    gettext-base \
+    g++ \
+    gcc \
+    git \
+    libelf-dev \
+    libgmp3-dev \
+    libncurses5-dev \
+    libssl-dev \
+    libtool \
+    libtool-bin \
+    make \
+    meson \
+    patch \
+    pkg-config \
+    python-dev-is-python3 \
+    texinfo \
+    vim \
+    wget \
+    xz-utils \
+    zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN \
-  git clone https://github.com/ps3dev/ps3toolchain.git && \
-  cd ps3toolchain && \
-  ./toolchain.sh && \
-  cd .. && \
-  rm -Rf ps3toolchain
+# Fixes certificate errors with letsencrypt in ARMv7
+RUN echo "ca_certificate=/etc/ssl/certs/ca-certificates.crt" >> /etc/wgetrc \
+    && echo "check_certificate = off" >> /root/.wgetrc \
+    && ln -sf "/usr/include/$(gcc -dumpmachine)/gmp.h" /usr/include/gmp.h
+
+RUN git clone --depth 1 https://github.com/humbertodias/ps3toolchain.git /toolchain \
+    && /toolchain/toolchain.sh \
+    && rm -rf /toolchain
 
 WORKDIR /build
+CMD ["/bin/bash"]
